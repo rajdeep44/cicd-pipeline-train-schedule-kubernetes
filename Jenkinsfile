@@ -4,14 +4,14 @@ pipeline {
         DOCKER_IMAGE_NAME = "rajdeep44/train-schedule"
     }
     stages {
-        stage('Build') {
+        stage ('Build') {
             steps {
                 echo 'Running build automation'
                 sh './gradlew build --no-daemon'
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
-        stage('Build Docker Image') {
+        stage ('Build Docker Image') {
             when {
                 branch 'master'
             }
@@ -24,7 +24,7 @@ pipeline {
                 }
             }
         }
-        stage('Push Docker Image') {
+        stage ('Push Docker Image') {
             when {
                 branch 'master'
             }
@@ -37,7 +37,7 @@ pipeline {
                 }
             }
         }
-        stage('DeployToProduction') {
+        stage ('DeployToProduction') {
             when {
                 branch 'master'
             }
